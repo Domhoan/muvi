@@ -32,4 +32,17 @@ object GenreUtil {
     fun getIdGenre(name: String) = genres.first {
         it.name == name
     }.id
+
+    fun getGenreOfMovie(data: List<Int>?): String {
+        return if (data.isNullOrEmpty()) ""
+        else {
+            var result = getNameGenre(data.first())
+            if (data.size >1) {
+                for (item in data) {
+                    result += "   " + getNameGenre(item)
+                }
+            }
+            result
+        }
+    }
 }

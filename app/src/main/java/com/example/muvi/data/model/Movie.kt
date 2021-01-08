@@ -11,19 +11,26 @@ data class Movie(
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")
-    var title: String,
+    var title: String?,
     @SerializedName("vote_average")
-    var rate: Float,
+    var rate: Float?,
     @SerializedName("overview")
-    var description: String,
+    var description: String?,
     @SerializedName("poster_path")
     var poster: String?,
     @SerializedName("backdrop_path")
     var background: String?,
     @SerializedName("release_date")
-    var releaseDate: String,
+    var releaseDate: String?,
+    @Ignore
+    @SerializedName("media_type")
+    var movieType: String?,
+    @Ignore
     @SerializedName("runtime")
-    var runtime: Int,
+    var runtime: Int?,
+    @Ignore
+    @SerializedName("video")
+    var video : String?,
     @Ignore
     @SerializedName("genre_ids")
     var genreIds: List<Int>?,
@@ -37,13 +44,12 @@ data class Movie(
 
     constructor(
         id: Int,
-        title: String,
-        rate: Float,
-        description: String,
+        title: String?,
+        rate: Float?,
+        description: String?,
         poster: String?,
         background: String?,
-        releaseDate: String,
-        runtime: Int
+        releaseDate: String?
     ) : this(
         id,
         title,
@@ -52,7 +58,9 @@ data class Movie(
         poster,
         background,
         releaseDate,
-        runtime,
+        null,
+        null,
+        null,
         listOf(),
         listOf(),
         listOf()
@@ -66,7 +74,9 @@ data class Movie(
         poster = movie.poster,
         background = movie.background,
         releaseDate = movie.releaseDate,
+        movieType = movie.movieType,
         runtime = movie.runtime,
+        video = movie.video,
         genreIds = movie.genreIds,
         genres = movie.genres,
         productionCompanies = movie.productionCompanies
@@ -77,4 +87,13 @@ data class Movie(
 
     override fun areContentsTheSame(newItem: GeneralEntity): Boolean =
         newItem is Movie && this == newItem
+
+    fun haveContent() : Boolean{
+        return !(this.background.isNullOrEmpty() || this.poster.isNullOrEmpty())
+    }
+
+    companion object {
+        const val MOVIE = "movie"
+        const val PERSON = "person"
+    }
 }

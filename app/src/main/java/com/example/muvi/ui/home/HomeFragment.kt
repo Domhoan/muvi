@@ -1,5 +1,8 @@
 package com.example.muvi.ui.home
 
+import android.content.Context
+import android.view.WindowManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.muvi.R
 import com.example.muvi.base.BaseFragment
@@ -32,9 +35,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             PagerSnapHelper().attachToRecyclerView(recyclerBanner)
             pageIndicatorBanner.attachToRecyclerView(recyclerBanner)
         }
+        initListener()
+    }
+
+    private fun initListener(){
+        binding.imageFavorite.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToFavoriteFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun onItemPosterClick(movie: Movie) {
+        binding.apply {
+            navigateToList(movie.id)
+        }
+    }
 
+    private fun navigateToList(idMovie: Int) {
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(idMovie)
+        findNavController().navigate(action)
     }
 }

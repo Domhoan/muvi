@@ -34,16 +34,18 @@ class MovieRepositoryType(
     override fun getVideo(movieId: Int): Observable<Video> =
         remote.getVideo(movieId).map { getTrailer(it) }
 
-    override fun search(param: String): Observable<List<Search>> =
+    override fun search(param: String): Observable<List<Movie>> =
         remote.search(param).map {
-            it.filter { item ->
-                item.mediaType == Search.MOVIE || item.mediaType == Search.PERSON
+            getMoviesType(it).filter { item ->
+                !item.poster.isNullOrEmpty() && (item.movieType == Movie.MOVIE || item.movieType == Movie.PERSON)
             }
         }
 
     override fun getMoviesOfActor(actorId: Int): Observable<List<Movie>> =
         remote.getMoviesOfActor(actorId).map {
-            getMoviesType(it)
+            getMoviesActor(it).filter {movie ->
+                !movie.poster.isNullOrEmpty()
+            }
         }
 
     override fun getMoviesByGenre(genreId: Int, page: Int?): Observable<List<Movie>> {
@@ -60,8 +62,27 @@ class MovieRepositoryType(
     override fun getDetailMovie(movieId: Int): Observable<Movie> =
         remote.getDetailMovie(movieId)
 
+    override fun getUpComingMovie(date: String, page: Int?): Observable<List<Movie>> =
+        remote.getUpComingMovies(date, page).map {
+            getMoviesType(it).filter { movie ->
+                movie.haveContent()
+            }
+        }
+
+    override fun getMovieCompany(companyId: Int, page: Int?): Observable<List<Movie>> =
+        remote.getMoviesOfCompany(companyId, page).map {
+            getMoviesType(it).filter { movie ->
+                !movie.poster.isNullOrEmpty()
+            }
+        }
+
     private fun getMoviesType(moviesResponse: MovieResponse): List<Movie> =
-        moviesResponse.movies.map {
+        moviesResponse.movies!!.map {
+            Movie(it)
+        }
+
+    private fun getMoviesActor(moviesResponse: MovieResponse): List<Movie> =
+        moviesResponse.movieOfActor!!.map {
             Movie(it)
         }
 

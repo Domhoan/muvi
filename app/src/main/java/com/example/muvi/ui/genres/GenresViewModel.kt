@@ -14,8 +14,8 @@ class GenresViewModel(
     private val movieRepository: MovieRepository
 ) : RxViewModel() {
 
-    private var currentPage: Int = 0
-    private var currentGenre: Int = 0
+    var currentPage: Int = 0
+    var currentGenre: Int = 0
     private val _movie = MutableLiveData<MutableList<Movie>>()
     private val _genre = MutableLiveData<List<Genre>>()
     val movies: LiveData<MutableList<Movie>>
@@ -25,6 +25,16 @@ class GenresViewModel(
 
     init {
         getGenre()
+    }
+
+    fun getMovies(genreId: Int) {
+        if (currentGenre == genreId) {
+            getData(currentGenre)
+        } else {
+            currentPage = 0
+            currentGenre = genreId
+            getData(currentGenre)
+        }
     }
 
     private fun getGenre() {
@@ -60,15 +70,5 @@ class GenresViewModel(
                 }
             )
             .addTo(disposables)
-    }
-
-    fun getMovies(genreId: Int) {
-        if (currentGenre == genreId) {
-            getData(currentGenre)
-        } else {
-            currentPage = 0
-            currentGenre = genreId
-            getData(currentGenre)
-        }
     }
 }

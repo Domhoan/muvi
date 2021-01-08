@@ -13,7 +13,7 @@ interface MovieRepository {
 
     fun getVideo(movieId: Int): Observable<Video>
 
-    fun search(param: String): Observable<List<Search>>
+    fun search(param: String): Observable<List<Movie>>
 
     fun getMoviesOfActor(actorId: Int): Observable<List<Movie>>
 
@@ -22,4 +22,8 @@ interface MovieRepository {
     fun getGenres(): Observable<List<Genre>>
 
     fun getDetailMovie(movieId: Int): Observable<Movie>
+
+    fun getUpComingMovie(date : String, page: Int?) : Observable<List<Movie>>
+
+    fun getMovieCompany(companyId : Int,page: Int?) : Observable<List<Movie>>
 }

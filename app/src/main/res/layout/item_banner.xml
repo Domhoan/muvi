@@ -15,30 +15,15 @@
 
         <ImageView
             android:id="@+id/imageBanner"
-            image="@{movie.background}"
+            image="@{movie.poster}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_8"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textTitleBanner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_24"
-            android:fontFamily="@font/cherry_swash"
-            android:gravity="center"
-            android:text="@{movie.title}"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/sp_32"
-            app:layout_constraintBottom_toBottomOf="@+id/imageBanner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

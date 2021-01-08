@@ -2,9 +2,11 @@ package com.example.muvi.data.source.remote
 
 import com.example.muvi.data.model.*
 import com.example.muvi.utils.ApiEndPoint
+import com.example.muvi.utils.ApiEndPoint.PARAMS_DATE
 import com.example.muvi.utils.ApiEndPoint.PARAMS_GENRE_ID
 import com.example.muvi.utils.ApiEndPoint.PARAMS_ID
 import com.example.muvi.utils.ApiEndPoint.PARAMS_PAGE
+import com.example.muvi.utils.ApiEndPoint.PARAMS_WITH_COMPANY
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -34,12 +36,18 @@ interface MovieService {
     fun getVideo(@Path(PARAMS_ID) movieId: Int): Observable<DetailMovie>
 
     @GET(ApiEndPoint.SEARCH_MULTI)
-    fun search(@Query("query") param: String): Observable<List<Search>>
+    fun search(@Query("query") param: String): Observable<MovieResponse>
 
     @GET(ApiEndPoint.GET_MOVIE_OF_ACTOR)
     fun getMoviesOfActor(@Path(PARAMS_ID) actorId: Int): Observable<MovieResponse>
 
-    @GET(ApiEndPoint.GET_DISCOVERY_MOVIE)
+    @GET(ApiEndPoint.GET_MOVIE_BY_GENRE)
+    fun getMoviesOfCompany(
+        @Query(PARAMS_WITH_COMPANY) companyId: Int,
+        @Query(PARAMS_PAGE) page: Int?
+    ): Observable<MovieResponse>
+
+    @GET(ApiEndPoint.GET_MOVIE_BY_GENRE)
     fun getMovieByGenre(
         @Query(PARAMS_GENRE_ID) genreId: Int,
         @Query(PARAMS_PAGE) page: Int? = null
@@ -47,4 +55,11 @@ interface MovieService {
 
     @GET(ApiEndPoint.GET_DETAIL_MOVIE)
     fun getDetailMovie(@Path(PARAMS_ID) movieId: Int): Observable<Movie>
+
+    @GET(ApiEndPoint.GET_UPCOMING_MOVIE)
+    fun getUpComingMovies(
+        @Query(PARAMS_DATE) date: String,
+        @Query(PARAMS_PAGE) page: Int? = null
+    ): Observable<MovieResponse>
+
 }
