@@ -55,6 +55,8 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         _binding = null
     }
 
+    fun showToast(msg: String) = requireContext().showToast(msg)
+
     open fun onBackPress() {
         bottomNavigationListener?.showNav()
     }

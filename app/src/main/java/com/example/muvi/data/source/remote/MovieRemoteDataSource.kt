@@ -38,4 +38,7 @@ class MovieRemoteDataSource(private val movieService: MovieService) : MovieDataS
 
     override fun getDetailMovie(movieId: Int): Observable<Movie> =
         movieService.getDetailMovie(movieId)
+
+    override fun getUpComingMovies(date: String, page: Int?): Observable<MovieResponse> =
+        movieService.getUpComingMovies(date, page)
 }

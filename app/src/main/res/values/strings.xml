@@ -19,4 +19,10 @@
     <string name="text_search_input">Search for movie, genres, people</string>
     <string name="text_play_trailer">Play Trailer</string>
     <string name="text_more_like_this">MORE LIKE THIS</string>
+    <string name="text_detail">Detail</string>
+    <string name="text_coming">Coming</string>
+    <string name="text_delete">Delete</string>
+    <string name="title_my_list">My List</string>
+    <string name="title_company">Company</string>
+    <string name="title_actor">Actor</string>
 </resources>

@@ -3,9 +3,7 @@ package com.example.muvi.ui.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.muvi.base.RxViewModel
-import com.example.muvi.data.model.Actor
-import com.example.muvi.data.model.Movie
-import com.example.muvi.data.model.Video
+import com.example.muvi.data.model.*
 import com.example.muvi.data.repository.FavoriteRepository
 import com.example.muvi.data.repository.MovieRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -36,6 +34,9 @@ class DetailViewModel(
     val actors: LiveData<List<Actor>>
         get() = _actors
 
+    val companies = MutableLiveData<List<Company>>()
+    var typeMovie = MutableLiveData<String>()
+
     fun loadDetail(movieId: Int) {
         getDetail(movieId)
         getActors(movieId)
@@ -51,6 +52,8 @@ class DetailViewModel(
             .subscribe(
                 {
                     _detail.value = it
+                    getCompanies(it)
+                    getTypeMovie(it.genres)
                 },
                 {
                     error.value = it.message
@@ -148,6 +151,20 @@ class DetailViewModel(
                         }
                     )
                     .addTo(disposables)
+            }
+        }
+    }
+
+    private fun getCompanies(movie: Movie) {
+        companies.value = movie.productionCompanies?.filter { company ->
+            company.logo != null
+        }
+    }
+
+    private fun getTypeMovie(genres: List<Genre>?) {
+        genres?.let {
+            typeMovie.value = it.joinToString("\t•\t") { genre ->
+                genre.name
             }
         }
     }

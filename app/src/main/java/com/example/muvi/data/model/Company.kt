@@ -9,4 +9,11 @@ data class Company(
     val name: String = "",
     @SerializedName("logo_path")
     val logo: String? = null
-)
+) : GeneralEntity {
+
+    override fun areItemsTheSame(newItem: GeneralEntity): Boolean =
+        newItem is Company && this.id == newItem.id
+
+    override fun areContentsTheSame(newItem: GeneralEntity): Boolean =
+        newItem is Company && this == newItem
+}

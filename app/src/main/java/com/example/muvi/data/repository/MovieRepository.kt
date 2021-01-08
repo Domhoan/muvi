@@ -22,4 +22,6 @@ interface MovieRepository {
     fun getGenres(): Observable<List<Genre>>
 
     fun getDetailMovie(movieId: Int): Observable<Movie>
+
+    fun getUpComingMovie(date : String, page: Int?) : Observable<List<Movie>>
 }

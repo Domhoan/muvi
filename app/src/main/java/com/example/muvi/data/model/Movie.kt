@@ -22,8 +22,12 @@ data class Movie(
     var background: String?,
     @SerializedName("release_date")
     var releaseDate: String,
+    @Ignore
     @SerializedName("runtime")
-    var runtime: Int,
+    var runtime: Int?,
+    @Ignore
+    @SerializedName("video")
+    var video : String?,
     @Ignore
     @SerializedName("genre_ids")
     var genreIds: List<Int>?,
@@ -42,8 +46,7 @@ data class Movie(
         description: String,
         poster: String?,
         background: String?,
-        releaseDate: String,
-        runtime: Int
+        releaseDate: String
     ) : this(
         id,
         title,
@@ -52,7 +55,8 @@ data class Movie(
         poster,
         background,
         releaseDate,
-        runtime,
+        null,
+        null,
         listOf(),
         listOf(),
         listOf()
@@ -67,6 +71,7 @@ data class Movie(
         background = movie.background,
         releaseDate = movie.releaseDate,
         runtime = movie.runtime,
+        video = movie.video,
         genreIds = movie.genreIds,
         genres = movie.genres,
         productionCompanies = movie.productionCompanies
@@ -77,4 +82,9 @@ data class Movie(
 
     override fun areContentsTheSame(newItem: GeneralEntity): Boolean =
         newItem is Movie && this == newItem
+
+    fun haveContent() : Boolean{
+        if(this.background.isNullOrEmpty() || this.poster.isNullOrEmpty()) return false
+        else return true
+    }
 }

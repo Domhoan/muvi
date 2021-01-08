@@ -27,5 +27,7 @@ interface MovieDataSource {
         fun getMovieByGenre(genreId: Int, page: Int? = null): Observable<MovieResponse>
 
         fun getDetailMovie(movieId: Int): Observable<Movie>
+
+        fun getUpComingMovies(date: String, page: Int? = null): Observable<MovieResponse>
     }
 }

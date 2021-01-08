@@ -11,7 +11,7 @@ abstract class BaseAdapter<T : GeneralEntity, B : ViewBinding>(
 
     override fun onBindViewHolder(holder: BaseViewHolder<T, B>, position: Int) {
         holder.onBind(getItem(position))
-        if (position == currentList.size - NUMBER_OF_ITEM_SHOW) {
+        if ((position == currentList.size-1) || (position == (currentList.size+1) - currentList.size)) {
             loadMore()
         }
     }

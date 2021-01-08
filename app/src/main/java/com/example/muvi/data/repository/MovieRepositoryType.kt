@@ -60,6 +60,14 @@ class MovieRepositoryType(
     override fun getDetailMovie(movieId: Int): Observable<Movie> =
         remote.getDetailMovie(movieId)
 
+    override fun getUpComingMovie(date: String, page: Int?): Observable<List<Movie>> =
+        remote.getUpComingMovies(date, page).map {
+            getMoviesType(it).filter { movie ->
+                println(it?.movies ?: "err" )
+                movie.haveContent()
+            }
+        }
+
     private fun getMoviesType(moviesResponse: MovieResponse): List<Movie> =
         moviesResponse.movies.map {
             Movie(it)
