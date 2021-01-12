@@ -42,74 +42,53 @@
             app:layout_constraintBottom_toBottomOf="@+id/bannerUpComing"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/autour_one"
             android:text="@string/text_coming"
             android:textColor="@color/color_monza"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_20"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageMyList" />
+            app:layout_constraintTop_toTopOf="@+id/imageViewDetail" />
 
         <TextView
             android:id="@+id/textDateMovie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/gabriela"
             android:text="@{movie.releaseDate}"
             android:textColor="@android:color/darker_gray"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textMyListUC"
-            app:layout_constraintStart_toEndOf="@+id/textView" />
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <ImageView
             android:id="@+id/imageViewDetail"
-            android:layout_width="@dimen/dp_24"
-            android:layout_height="@dimen/dp_24"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
             android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginEnd="24dp"
             android:src="@drawable/ic_information"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bannerUpComing" />
-
-        <ImageView
-            android:id="@+id/imageMyList"
-            android:layout_width="@dimen/dp_32"
-            android:layout_height="@dimen/dp_32"
-            android:layout_marginEnd="@dimen/dp_40"
-            android:src="@drawable/ic_baseline_add_24"
-            android:text="@string/text_my_list"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewDetail"
-            app:layout_constraintEnd_toStartOf="@+id/imageViewDetail"
-            app:layout_constraintTop_toTopOf="@+id/imageViewDetail" />
 
         <TextView
             android:id="@+id/textDetailUC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lato"
             android:text="@string/text_detail"
-            android:fontFamily="@font/lato"
             android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/sp_20"
+            app:layout_constraintBottom_toBottomOf="@+id/textDateMovie"
             app:layout_constraintEnd_toEndOf="@+id/imageViewDetail"
-            app:layout_constraintStart_toStartOf="@+id/imageViewDetail"
-            app:layout_constraintTop_toTopOf="@+id/textMyListUC" />
-
-        <TextView
-            android:id="@+id/textMyListUC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
-            android:text="@string/text_my_list"
-            android:fontFamily="@font/lato"
-            android:textColor="@android:color/darker_gray"
-            app:layout_constraintEnd_toEndOf="@+id/imageMyList"
-            app:layout_constraintStart_toStartOf="@+id/imageMyList"
-            app:layout_constraintTop_toBottomOf="@+id/imageMyList" />
+            app:layout_constraintStart_toStartOf="@+id/imageViewDetail" />
 
         <TextView
             android:id="@+id/textNameMovie"

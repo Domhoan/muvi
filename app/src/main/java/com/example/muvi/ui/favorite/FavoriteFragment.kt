@@ -23,6 +23,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(){
             lifecycleOwner = this@FavoriteFragment
             favoriteVM = viewModel
             recyclerFavorite.adapter = favoriteAdapter
+            initListener()
         }
     }
 

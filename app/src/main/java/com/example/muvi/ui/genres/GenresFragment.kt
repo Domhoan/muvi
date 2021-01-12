@@ -6,6 +6,7 @@ import com.example.muvi.base.BaseFragment
 import com.example.muvi.data.model.Genre
 import com.example.muvi.databinding.FragmentGenreBinding
 import com.example.muvi.ui.adpater.GenresAdapter
+import com.example.muvi.utils.make
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class GenresFragment : BaseFragment<FragmentGenreBinding>() {
@@ -15,9 +16,16 @@ class GenresFragment : BaseFragment<FragmentGenreBinding>() {
 
     override val viewModel by sharedViewModel<GenresViewModel>()
 
+    private var isConnection = false
+
     private val genresAdapter = GenresAdapter(::onItemGenreClick)
 
     override fun initData() {
+        isConnection = NetworkUtil.isConnection(requireContext())
+        if (!isConnection) {
+            view?.make(getString(R.string.err_internet))
+            return
+        }
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             genresVM = viewModel

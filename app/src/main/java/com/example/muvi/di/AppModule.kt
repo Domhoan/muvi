@@ -15,7 +15,7 @@ val viewModelModule = module {
     viewModel { GenresViewModel(get()) }
     viewModel { DetailViewModel(get(), get()) }
     viewModel { HomeViewModel(get()) }
-    viewModel { UpComingViewModel(get()) }
+    viewModel { UpComingViewModel(get(),get()) }
     viewModel { FavoriteViewModel(get()) }
     viewModel { MovieOfActorViewModel(get()) }
     viewModel { MovieOfCompanyViewModel(get()) }

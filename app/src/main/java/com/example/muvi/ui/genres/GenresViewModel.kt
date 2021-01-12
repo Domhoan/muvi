@@ -1,5 +1,6 @@
 package com.example.muvi.ui.genres
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.muvi.base.RxViewModel
@@ -14,8 +15,8 @@ class GenresViewModel(
     private val movieRepository: MovieRepository
 ) : RxViewModel() {
 
-    var currentPage: Int = 0
-    var currentGenre: Int = 0
+    private var currentPage: Int = 0
+    private var currentGenre: Int = 0
     private val _movie = MutableLiveData<MutableList<Movie>>()
     private val _genre = MutableLiveData<List<Genre>>()
     val movies: LiveData<MutableList<Movie>>
@@ -33,6 +34,7 @@ class GenresViewModel(
         } else {
             currentPage = 0
             currentGenre = genreId
+            movies.value?.clear()
             getData(currentGenre)
         }
     }

@@ -29,4 +29,11 @@
     <string name="text_feedback">Feedback</string>
     <string name="text_about_app">About app</string>
     <string name="text_type_somthing">Type something...</string>
+    <string name="err_no_trailer">This movie have not trailer !</string>
+    <string name="text_feedback_subject">Feedback about app Mu Vi !</string>
+    <string name="uri_mail_to">mailto:benmitu21@gmail.com</string>
+    <string name="text_dialog_about_app">About app</string>
+    <string name="text_about_app_by_ht"><![CDATA[Application developed by H&T /n Version 1.0]]></string>
+    <string name="err_internet">Please check your internet connection !</string>
+    <string name="text_loading">Loading...</string>
 </resources>

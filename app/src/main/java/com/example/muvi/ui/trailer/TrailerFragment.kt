@@ -14,6 +14,7 @@ import com.example.muvi.base.BottomNavigationListener
 import com.example.muvi.databinding.FragmentTrailerMovieBinding
 import com.example.muvi.ui.detail.DetailViewModel
 import com.example.muvi.utils.hide
+import com.example.muvi.utils.make
 import com.example.muvi.utils.show
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -91,6 +92,10 @@ class TrailerFragment : BaseFragment<FragmentTrailerMovieBinding>() {
     }
 
     private fun loadVideo(youtubeId: String) {
+        if(youtubeId.isNullOrEmpty()){
+            view?.make("This movie don't have trailer ! ")
+            return
+        }
         val youtubeView = binding.youtubePlayerView
         youtubeView.enterFullScreen()
         youtubeView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {

@@ -32,6 +32,9 @@ data class Movie(
     @SerializedName("video")
     var video : String?,
     @Ignore
+    @SerializedName("is_favorite")
+    var isFavorite : Boolean?,
+    @Ignore
     @SerializedName("genre_ids")
     var genreIds: List<Int>?,
     @Ignore
@@ -61,6 +64,7 @@ data class Movie(
         null,
         null,
         null,
+        null,
         listOf(),
         listOf(),
         listOf()
@@ -77,6 +81,7 @@ data class Movie(
         movieType = movie.movieType,
         runtime = movie.runtime,
         video = movie.video,
+        isFavorite = movie.isFavorite,
         genreIds = movie.genreIds,
         genres = movie.genres,
         productionCompanies = movie.productionCompanies

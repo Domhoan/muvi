@@ -11,12 +11,16 @@ import com.example.muvi.databinding.FragmentHomeBinding
 import com.example.muvi.ui.adpater.DiscoveryAdapter
 import com.example.muvi.ui.adpater.PosterAdapter
 import com.example.muvi.ui.adpater.BannerAdapter
+import com.example.muvi.utils.make
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override val layoutResource: Int = R.layout.fragment_home
     override val viewModel by sharedViewModel<HomeViewModel>()
+
+    private var isConnection = false
+
     private val discoveryAdapter = DiscoveryAdapter(::onItemPosterClick)
     private val trendingAdapter = PosterAdapter(::onItemPosterClick)
     private val topRateAdapter = PosterAdapter(::onItemPosterClick)
@@ -24,6 +28,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val bannerAdapter = BannerAdapter(::onItemPosterClick)
 
     override fun initData() {
+        isConnection = NetworkUtil.isConnection(requireContext())
+        if (!isConnection) {
+            view?.make(getString(R.string.err_internet))
+            return
+        }
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             homeVM = viewModel
